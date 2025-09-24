@@ -180,3 +180,33 @@ th {
         font-size: 1.3em;
     }
 }
+/* Destaque de produtos com estoque baixo na tabela */
+td.estoque-baixo {
+    background-color: #ffebee; /* vermelho claro */
+    color: #c62828;             /* texto vermelho escuro */
+    font-weight: 700;
+}
+
+/* Lista de alertas de estoque baixo */
+ul.alertas {
+    list-style-type: none;
+    padding: 0;
+    margin: 12px 0;
+}
+
+ul.alertas li {
+    background-color: #ffebee;
+    color: #c62828;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    box-shadow: 0 2px 6px rgba(198, 40, 40, 0.2);
+}
+.separador {
+    width: 100%;
+    height: 2px;
+    background-color: #1976d2; /* cor azul */
+    margin: 32px 0;
+    border-radius: 4px; /* deixa as bordas arredondadas */
+}

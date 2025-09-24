@@ -7,13 +7,17 @@
 </head>
 <body>
     <div class="container">
+        <!-- Barra superior com logout -->
         <div class="top-bar">
             <form action="{{ url_for('logout') }}" method="get">
                 <button type="submit" class="btn-sair">Sair</button>
             </form>
         </div>
+
         <h1>Sistema de Estoque</h1>
 
+        <!-- Formulário para cadastrar produto -->
+        <div class="separador"></div>
         <h2>Cadastrar Produto</h2>
         <form action="{{ url_for('adicionar') }}" method="POST" class="form">
             <input type="text" name="id" placeholder="ID" required>
@@ -26,6 +30,8 @@
             <button type="submit">Cadastrar</button>
         </form>
 
+        <!-- Tabela de produtos cadastrados -->
+         <div class="separador"></div>
         <h2>Produtos Cadastrados</h2>
         <table>
             <tr>
@@ -40,13 +46,13 @@
             </tr>
             {% for produto in disponiveis %}
             <tr>
-                <td>{{ produto['id'] }}</td>
-                <td>{{ produto['nome'] }}</td>
-                <td>{{ produto['categoria'] }}</td>
-                <td>{{ produto['quantidade'] }}</td>
-                <td>{{ produto['preco_compra'] }}</td>
-                <td>{{ produto['preco_venda'] }}</td>
-                <td>{{ produto['fornecedor'] }}</td>
+                <td>{{ produto.id }}</td>
+                <td>{{ produto.nome }}</td>
+                <td>{{ produto.categoria }}</td>
+                <td class="{% if produto.quantidade < 10 %}estoque-baixo{% endif %}">{{ produto.quantidade }}</td>
+                <td>{{ produto.preco_compra }}</td>
+                <td>{{ produto.preco_venda }}</td>
+                <td>{{ produto.fornecedor }}</td>
                 <td>
                     <form action="{{ url_for('remover', indice=loop.index0) }}" method="POST" style="display:inline;">
                         <button type="submit" class="btn-remover">Remover</button>
@@ -55,6 +61,19 @@
             </tr>
             {% endfor %}
         </table>
+
+        <!-- Alertas de estoque baixo -->
+        <div class="separador"></div>
+        <h2>Alertas de Estoque Baixo</h2>
+        {% if estoque_baixo %}
+            <ul class="alertas">
+                {% for produto in estoque_baixo %}
+                    <li>Produto "{{ produto.nome }}" com estoque baixo: {{ produto.quantidade }} unidades restantes.</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Todos os produtos estão com estoque adequado.</p>
+        {% endif %}
     </div>
 </body>
 </html>

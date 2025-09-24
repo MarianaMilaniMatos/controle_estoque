@@ -12,6 +12,9 @@ class Produto:
     def descricao(self):
         return f"{self.id}- {self.nome} ({self.categoria}) - {self.quantidade} unidades - Compra: R${self.preco_compra:.2f}, Venda: R${self.preco_venda:.2f} - Fornecedor: {self.fornecedor}"
 
+    def estoque_baixo(self):
+        return self.quantidade < 10
+
 class EstoqueModel:
     def __init__(self):
         self.produtos = []
@@ -26,6 +29,10 @@ class EstoqueModel:
     def remover_produto(self, indice):
         if 0 <= indice < len(self.produtos):
             self.produtos.pop(indice)
+            
+
+
+
 
 class UsuarioModel:
     def __init__(self):
