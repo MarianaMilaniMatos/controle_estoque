@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from controller import EstoqueController
 
 app = Flask(__name__)
-app.secret_key = 'sua_chave_secreta'  # Necessário para sessões
+app.secret_key = 'sua_chave_secreta'  
 controller = EstoqueController()
 
 # Rota de login

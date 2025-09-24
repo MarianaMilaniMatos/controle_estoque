@@ -1,9 +1,11 @@
 from model import EstoqueModel, UsuarioModel
+
 class EstoqueController:
     def __init__(self):
-        self.estoque_model = EstoqueModel()
-        self.usuario_model = UsuarioModel()
+        self.estoque_model = EstoqueModel() #instância do modelo de estoque
+        self.usuario_model = UsuarioModel() #instância do modelo de usuário
 
+#todos os métodos do controlador existem no modelo
     def cadastrar_produto(self, id, nome, categoria, quantidade, preco_compra, preco_venda, fornecedor):
         self.estoque_model.adicionar_produto(id, nome, categoria, quantidade, preco_compra, preco_venda, fornecedor)
 
@@ -16,8 +18,6 @@ class EstoqueController:
     def autenticar_usuario(self, usuario, senha):
         return self.usuario_model.autenticar(usuario, senha)
 
-    # Novo método para filtrar produtos com estoque baixo
     def listar_estoque_baixo(self):
-        produtos = self.listar_produtos()
-        alertas = [produto for produto in produtos if produto.estoque_baixo()]
-        return alertas
+        return self.estoque_model.listar_estoque_baixo()
+    
